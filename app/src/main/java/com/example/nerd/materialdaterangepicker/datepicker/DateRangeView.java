@@ -142,7 +142,7 @@ public class DateRangeView extends ViewPager implements MonthView.MonthViewListe
         invalidateMonthViews();
     }
 
-    interface DateRangeViewListener {
+    public interface DateRangeViewListener {
         void onCurrentMonthChanged(DateRangeView dateRangeView, Calendar calendarMonth);
         void onDateRangeChanged(DateRangeView dateRangeView, DateRange dateRange);
     }

@@ -6,4 +6,6 @@
     <color name="colorAccentDark">#E85B30</color>
     <color name="white">#FFFFFF</color>
     <color name="grey">#d2cece</color>
+    <color name="gradient_start">#00c2e4</color>
+    <color name="gradient_end">#0094e0</color>
 </resources>

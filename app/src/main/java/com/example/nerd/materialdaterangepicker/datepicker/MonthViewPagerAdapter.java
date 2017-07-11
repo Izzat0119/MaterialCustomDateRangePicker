@@ -71,7 +71,7 @@ public class MonthViewPagerAdapter extends PagerAdapter {
         return view == object;
     }
 
-    protected Calendar getMonthCalendarForPosition(int position) {
+    Calendar getMonthCalendarForPosition(int position) {
         Calendar monthCalendar = Calendar.getInstance();
         monthCalendar.add(Calendar.MONTH, position - todayMonthIndex);
         return monthCalendar;

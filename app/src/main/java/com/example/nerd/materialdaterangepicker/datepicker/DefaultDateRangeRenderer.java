@@ -5,10 +5,10 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
 
 import com.example.nerd.materialdaterangepicker.R;
+import com.example.nerd.materialdaterangepicker.util.CalendarUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,7 +29,7 @@ public class DefaultDateRangeRenderer implements DateRangeView.DateRangeRenderer
 
     @SuppressWarnings("ResourceType")
     public DefaultDateRangeRenderer(Context context) {
-        int weekDayLabelTextColor = ContextCompat.getColorStateList(context, android.R.color.primary_text_light).getDefaultColor();
+        int weekDayLabelTextColor;
         float textSize = context.getResources().getDimension(R.dimen.weekday_text_size);
 
         TypedArray a = context.getTheme().obtainStyledAttributes(new int[]{
@@ -109,12 +109,11 @@ public class DefaultDateRangeRenderer implements DateRangeView.DateRangeRenderer
                 rectf.set(0, 0, radius * 2, radius * 2);
                 rectf.offset(cellInfo.cell.left + leftOffset / 2, cellInfo.cell.top + topOffset);
                 canvas.drawOval(rectf, selectionPaint);
-               // CommonUtility.IS_DATE_SELECTED = true;
+                // CommonUtility.IS_DATE_SELECTED = true;
             }
             //monthDayPaint.setColor(selectedTextColor);
             monthDayPaint.setFakeBoldText(true);
-        }
-        else {
+        } else {
             //monthDayPaint.setColor(unselectedTextColor);
             monthDayPaint.setFakeBoldText(false);
         }
@@ -146,15 +145,14 @@ public class DefaultDateRangeRenderer implements DateRangeView.DateRangeRenderer
 
         if (locale.equals(Locale.CHINA) || locale.equals(Locale.CHINESE) || locale.equals(Locale.SIMPLIFIED_CHINESE) || locale.equals(Locale.TRADITIONAL_CHINESE)) {
             int len = localWeekDisplayName.length();
-            weekString = localWeekDisplayName.substring(len -1, len);
+            weekString = localWeekDisplayName.substring(len - 1, len);
         }
 
         if (locale.getLanguage().equals("he") || locale.getLanguage().equals("iw")) {
-            if(cellInfo.day.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY) {
+            if (cellInfo.day.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY) {
                 int len = localWeekDisplayName.length();
                 weekString = localWeekDisplayName.substring(len - 2, len - 1);
-            }
-            else {
+            } else {
                 // I know this is duplication, but it makes the code easier to grok by
                 // having all hebrew code in the same block
                 weekString = localWeekDisplayName.toUpperCase(locale).substring(0, 1);

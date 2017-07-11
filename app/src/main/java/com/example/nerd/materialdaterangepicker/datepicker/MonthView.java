@@ -8,7 +8,6 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -162,28 +161,12 @@ public class MonthView extends View {
 
             if (y >= 0) {
                 reusableCalendarToFirstCellDay(reusableCalendar);
-
                 float paddingEnd = ViewCompat.getPaddingEnd(this);
                 float dayWidth = (this.width - paddingStart - paddingEnd) / weekDayCount;
-
                 int row = (int) (y / rowHeight);
                 int col = (int) (x / dayWidth);
                 int cell = row * weekDayCount + col;
-
-                Calendar cal = Calendar.getInstance();
                 reusableCalendar.add(Calendar.DATE, cell);
-
-                int currentDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
-
-                Log.e("Calerder_Aziz","Current ="+cal.getTimeInMillis()+" Select ="+reusableCalendar.getTimeInMillis()+" ="+currentDayOfMonth+", "+cell);
-
-                if(cal.getTimeInMillis() > reusableCalendar.getTimeInMillis()){
-                    if(currentDayOfMonth == cell+1){
-                       //Do nothing
-                    }else{
-                        return false;
-                    }
-                }
                 delegate.onDayClicked((Calendar) reusableCalendar.clone());
                 return true;
             }
